@@ -251,6 +251,10 @@ public class MultiplePanes extends JFrame {
 			button_2.setEnabled(true);
 		}
 		
+		button_1.setMnemonic('v');
+		button_1.setToolTipText("Voltar alt+v");
+		button_2.setMnemonic('a');
+		button_2.setToolTipText("Avançar alt+a");
 		
 		GroupLayout gl_panel1 = new GroupLayout(panel_1);
 		gl_panel1.setHorizontalGroup(
