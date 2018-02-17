@@ -36,6 +36,7 @@ public class MultiplePanes extends JFrame {
 	private JTextField textField;
 	private JButton button_1 = new JButton("<<");	
 	private JButton button_2 = new JButton(">>");
+	private JButton pesquisa = new JButton("Pesquisa");
 	private int page = 1;
 	CarregaPdf carregaPDF;
 
@@ -246,15 +247,19 @@ public class MultiplePanes extends JFrame {
 		if(carregaPDF.getNpag()<=1) {
 			button_1.setEnabled(false);
 			button_2.setEnabled(false);
+			pesquisa.setVisible(false);
 		}else {
 			button_1.setEnabled(true);
 			button_2.setEnabled(true);
+			pesquisa.setVisible(true);
 		}
 		
-		button_1.setMnemonic('v');
+		button_1.setMnemonic(KeyEvent.VK_V);
 		button_1.setToolTipText("Voltar alt+v");
-		button_2.setMnemonic('a');
+		button_2.setMnemonic(KeyEvent.VK_A);
 		button_2.setToolTipText("Avançar alt+a");
+		pesquisa.setMnemonic(KeyEvent.VK_P);
+		pesquisa.setToolTipText("Pesquisar empregado alt+p");
 		
 		GroupLayout gl_panel1 = new GroupLayout(panel_1);
 		gl_panel1.setHorizontalGroup(
@@ -269,6 +274,8 @@ public class MultiplePanes extends JFrame {
 								.addComponent(lblNumPag)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(button_2)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(pesquisa)
 								.addContainerGap())
 						
 						.addGroup(gl_panel1.createSequentialGroup()
@@ -303,7 +310,9 @@ public class MultiplePanes extends JFrame {
 					.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
 							.addComponent(button_1)
 							.addComponent(lblNumPag)
-							.addComponent(button_2)))
+							.addComponent(button_2)
+							.addComponent(pesquisa)))
+				
 				.addGroup(gl_panel1.createSequentialGroup()
 					.addContainerGap()
 					.addGap(7)

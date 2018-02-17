@@ -16,10 +16,11 @@ public class TrataPonto {
 	private double entradaPDecimal;
 	private double saidaDecimal;
 	private final double NOTURNO = 22;
-	private final double NOTURNODS = 7;
+	private final double NOTURNODS = 7; //somar .083 caso seja necessário validar hora de saída 
 	private final double HrsNot2224 = 2;
 	private final double HrsFimDia = 24;
 	private double horaNoturna = 0;
+	private double hrsPausa = 0;
 	
 	private double hrsnot = 0;
 	private double hrstot = 0;
@@ -37,6 +38,7 @@ public class TrataPonto {
 		this.hrstot = hrsTrab();
 		this.hrsnot = hrsNot();
 		this.setHrsdia(this.hrstot - this.hrsnot);
+		this.hrsPausa = qtdHrsPausa();
 		
 		
 	}
@@ -111,6 +113,10 @@ public class TrataPonto {
 		}else {
 			soma = soma + (saida - entradaInt);
 		}
+		//Apenas será executado se a quantidade de horas noturnas englobar a pausa.
+		//Retirar caso não seja necessário.
+		soma = soma + qtdHrsPausa(); 
+	
 		
 		return soma;
 	}
@@ -149,11 +155,11 @@ public class TrataPonto {
 					hrs = hrs + (saida - entrada);
 				}
 				
-				if(saida<NOTURNODS & entrada<NOTURNO & i<2) { 
+				if(saida<=NOTURNODS & entrada<NOTURNO & i<2) { 
 					hrs = hrs + (HrsNot2224 + saida);
 				}
 				
-				if(saida<NOTURNODS & entrada>NOTURNO) {
+				if(saida<=NOTURNODS & entrada>NOTURNO) {
 					hrs = hrs + (HrsFimDia - entrada);
 					hrs = hrs + saida;
 				}
@@ -166,11 +172,49 @@ public class TrataPonto {
 					hrs = hrs + (NOTURNODS - entrada);
 				}
 				
-				if(saida<NOTURNODS & entrada<NOTURNODS) {
+				if(saida<=NOTURNODS & entrada<NOTURNODS) {
 					hrs = hrs + (saida-entrada);
+				}
+				//Apenas será executado se a quantidade de horas noturnas englobar a pausa.
+				//Retirar caso não seja necessário.
+				if(i<2) {
+					hrs = hrs + qtdHrsPausa(); //Adicionar qtd hrs pausa noturno
 				}
 				
 			}
+		}
+		
+		return hrs;
+	}
+	
+	private double qtdHrsPausa() {
+		double hrs = 0;
+		double ini = this.saidaPDecimal;
+		double fim = this.entradaPDecimal;
+		
+		if((ini> NOTURNODS & ini<NOTURNO & fim<NOTURNO) | (ini>NOTURNODS & ini < NOTURNO & fim>NOTURNODS)) {
+			return 0; //nenhuma hora a ser contabilizada
+		}
+		
+		if(ini<NOTURNO & fim>NOTURNO) {
+			hrs = hrs +(fim-NOTURNO);
+		}
+		
+		if(ini>NOTURNO & fim>NOTURNO) {
+			hrs = hrs +(fim-ini);
+		}
+		
+		if(ini<NOTURNODS & fim<NOTURNODS) {
+			hrs = hrs +(fim-ini);
+		}
+		
+		if(ini>NOTURNO & fim<NOTURNODS) {
+			hrs = hrs +(HrsFimDia-ini);
+			hrs = hrs +fim;
+		}
+		
+		if(ini<NOTURNODS & fim>NOTURNODS) {
+			hrs = hrs + (NOTURNODS-ini);
 		}
 		
 		return hrs;
@@ -271,6 +315,14 @@ public class TrataPonto {
 
 	public void setHrsdia(double hrsdia) {
 		this.hrsdia = hrsdia;
+	}
+
+	public double getHrsPausa() {
+		return hrsPausa;
+	}
+
+	public void setHrsPausa(double hrsPausa) {
+		this.hrsPausa = hrsPausa;
 	}
 
 }
