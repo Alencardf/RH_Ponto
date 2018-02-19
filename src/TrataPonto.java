@@ -7,6 +7,9 @@ import java.util.List;
 
 public class TrataPonto {
 	
+	//Foi requisitada a inserção de fator na hora noturna e nas horas totais.
+	//Linhas alteradas: 121 e 184
+	
 	private String entradaNormal;
 	private String saidaPNormal;
 	private String entradaPNormal;

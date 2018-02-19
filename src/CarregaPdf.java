@@ -23,19 +23,6 @@ public class CarregaPdf{
 	private double tothrsnot = 0;
 	private double tothrsdia = 0;
 	
-//	public CarregaPdf(String path) {
-//		
-//		this.path = path;
-//		getPdfText();
-//		
-//		try {
-//			document.close();
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
 	public CarregaPdf(String path, int page) {
 		this.page = page;
 		this.path = path;
@@ -64,6 +51,7 @@ public class CarregaPdf{
 			}
 			document = PDDocument.load(file);
 			this.npag = document.getNumberOfPages();
+			
 		} catch (InvalidPasswordException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,6 +117,7 @@ public class CarregaPdf{
 		
 		return ponto;
 	}
+	
 
 	public String getNome() {
 		return nome;
@@ -168,6 +157,10 @@ public class CarregaPdf{
 
 	public void setNpag(int npag) {
 		this.npag = npag;
+	}
+	
+	public PDDocument getDocument() {
+		return document;
 	}
 
 }

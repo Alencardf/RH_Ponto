@@ -140,7 +140,7 @@ public class MultiplePanes extends JFrame {
 					carregaEmp(panel_1, textField.getText(), page);
 					
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(panel, "Caminho de arquivo inválido, favor verificar.");
+					JOptionPane.showMessageDialog(contentPane, "Caminho de arquivo inválido, favor verificar.");
 				}
 				
 			}
@@ -169,6 +169,27 @@ public class MultiplePanes extends JFrame {
 					panel_1.removeAll();
 					carregaEmp(panel_1, textField.getText(), page);
 				}
+				
+			}
+		});
+		
+		pesquisa.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+					
+					String pesquisa = JOptionPane.showInputDialog(contentPane, "Digitar o nome a ser pesquisado");
+					
+					if(!pesquisa.isEmpty()) {
+						
+						int pagina = Utilitarios.getPage(textField.getText(), pesquisa);
+						if(pagina!=0) {
+							panel_1.removeAll();
+							page = pagina;
+							carregaEmp(panel_1, textField.getText(), page);	
+						}
+					}
 				
 			}
 		});
@@ -260,6 +281,7 @@ public class MultiplePanes extends JFrame {
 		button_2.setToolTipText("Avançar alt+a");
 		pesquisa.setMnemonic(KeyEvent.VK_P);
 		pesquisa.setToolTipText("Pesquisar empregado alt+p");
+		
 		
 		GroupLayout gl_panel1 = new GroupLayout(panel_1);
 		gl_panel1.setHorizontalGroup(
