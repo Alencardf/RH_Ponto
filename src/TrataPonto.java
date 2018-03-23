@@ -22,9 +22,10 @@ public class TrataPonto {
 	private final double NOTURNODS = 7; //somar .083 caso seja necessário validar hora de saída 
 	private final double HrsNot2224 = 2;
 	private final double HrsFimDia = 24;
+	private final double FATNOT = 1.1429;
 	private double horaNoturna = 0;
 	private double hrsPausa = 0;
-	
+	private double hrsnotFat = 0;
 	private double hrsnot = 0;
 	private double hrstot = 0;
 	private double hrsdia = 0;
@@ -40,6 +41,7 @@ public class TrataPonto {
 		this.saidaDecimal = TrataPonto.mudaDoubel(saida);
 		this.hrstot = hrsTrab();
 		this.hrsnot = hrsNot();
+		this.hrsnotFat = hrsnot * FATNOT;
 		this.setHrsdia(this.hrstot - this.hrsnot);
 		this.hrsPausa = qtdHrsPausa();
 		
@@ -326,6 +328,14 @@ public class TrataPonto {
 
 	public void setHrsPausa(double hrsPausa) {
 		this.hrsPausa = hrsPausa;
+	}
+
+	public double getHrsnotFat() {
+		return hrsnotFat;
+	}
+
+	public void setHrsnotFat(double hrsnotFat) {
+		this.hrsnotFat = hrsnotFat;
 	}
 
 }

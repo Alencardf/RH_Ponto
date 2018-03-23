@@ -38,6 +38,7 @@ public class MultiplePanes extends JFrame {
 	private JButton button_2 = new JButton(">>");
 	private JButton pesquisa = new JButton("Pesquisa");
 	private int page = 1;
+	private final double FATNOT = 1.1429;
 	CarregaPdf carregaPDF;
 
 	/**
@@ -261,6 +262,11 @@ public class MultiplePanes extends JFrame {
 		lblHorasDiurnas.setFont(font);
 		lblNewLabel_3.setFont(font_plain);
 		
+		JLabel lblNotFat = new JLabel("Fator noturno:");
+		JLabel lblNotFatin = new JLabel(TrataPonto.mudaString(carregaPDF.getTothrsnot()*FATNOT));
+		lblNotFat.setFont(font);
+		lblNotFatin.setFont(font_plain);
+		
 		JLabel lblNumPag = new JLabel(page+" de "+carregaPDF.getNpag());
 		lblNumPag.setFont(font_plain);
 		
@@ -312,6 +318,12 @@ public class MultiplePanes extends JFrame {
 									.addComponent(lblHorasDiurnas)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(lblNewLabel_3))
+								
+								.addGroup(gl_panel1.createSequentialGroup()
+										.addComponent(lblNotFat)
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblNotFatin))
+								
 								.addGroup(gl_panel1.createSequentialGroup()
 									.addComponent(lblHorasNoturnas)
 									.addGap(18)
@@ -349,6 +361,10 @@ public class MultiplePanes extends JFrame {
 					.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblHorasNoturnas)
 						.addComponent(lblNewLabel_2))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblNotFat)
+							.addComponent(lblNotFatin))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblHorasDiurnas)

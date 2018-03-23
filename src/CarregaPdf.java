@@ -101,7 +101,6 @@ public class CarregaPdf{
 					this.tothrsnot = this.tothrsnot + tp.getHrsnot();
 					this.tothrstot = this.tothrstot + tp.getHrstot();
 					
-					
 					ponto.add(wa_ponto);
 					
 		}
